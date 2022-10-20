@@ -11,9 +11,11 @@
     <button>DOWN</button> -->
     <button id="btn">ADD ITEM</button>
     <button id="btn-name">CHANGE NAME</button>
-
+    <button id="increase">UP</button>
+    <button id="decrease">DOWN</button>
     <div class="counter" id="counter"> 0 </div>
-  
+        <button id="addText">Add Text</button>
+    <input type="text" id="todo-text"/>
     <script>
         let name = " Ben";
         let age  = 25;
@@ -182,7 +184,30 @@
       //DIV WITH COUNTER & A BUTTON UP WHICH INCREASES THE COUNTER ONCE CLICKED 
       let counter = document.getElementById('counter');
       console.log(counter.innerHTML)//OUTPUT: 0 
-      
+      function increaseCount(){
+        counter.innerHTML ++;
+      }
+      let increase = document.getElementById('increase');
+      increase.addEventListener('click', increaseCount)
+
+      //DECREASE COUNT
+      function decreaseCount(){
+        counter.innerHTML --;
+      }
+      let decrease = document.getElementById('decrease');
+      decrease.addEventListener('click', decreaseCount)
+
+      function addTextValue() {
+            let text = document.getElementById('todo-text')
+            let textValue = text.value;
+            console.log(textValue);
+            //CREATE DIV
+            let newDiv = document.createElement('div')
+            newDiv.innerHTML = textValue;
+            document.body.appendChild(newDiv)
+        }
+        let addText = document.getElementById('addText');
+        addText.addEventListener('click', addTextValue)
 
     </script>   
 </body>
