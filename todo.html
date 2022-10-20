@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO LIST PROJECT</title>
+</head>
+<body>
+    <!-- <button>UP</button>
+    <button>DOWN</button> -->
+    <button id="btn">ADD ITEM</button>
+    <button id="btn-name">CHANGE NAME</button>
+
+    <div class="counter" id="counter"> 0 </div>
+  
+    <script>
+        let name = " Ben";
+        let age  = 25;
+        let message = 'Im ' + name + ' and im ' + age + ' years old'
+
+        console.log(message)//OUTPUT: Im Ben and im 25 years old
+        typeof message // string
+
+        let todo1 = 'Wash Car'
+        let todo2 = 'Workout'
+        let todo3 = 'Code'
+        let todo4 = 'Eat'
+
+        //We can store these todo values in an array
+        let todos = ['Wash Car','Workout','Code']
+        //We can use forEach to loop over array and display the items in HTML
+        // todos.forEach( todoItem => {
+        //     let divElem = document.createElement('div');
+        //     divElem.innerHTML = todoItem;
+        //     document.body.appendChild(divElem);
+        // })\
+
+        //MAP METHOD instead of forEach
+        todos.map(todoItem => {
+                let divElem = document.createElement('div');
+                divElem.innerHTML = todoItem;
+                document.body.appendChild(divElem);
+            })
+
+
+            //function called to display todo items
+    // function displayTodos() {
+    //     return todos.map(todoItem => {
+    //         let divElem = document.createElement('div');
+    //         divElem.innerHTML = todoItem;
+    //         document.body.appendChild(divElem);
+    //     })
+    // }
+
+
+
+    let btn = document.getElementById('btn');
+    btn.addEventListener('click', addTodo)
+    //FUNCTION TO ADD NEW TODO ITEMS IN THE ARRAY
+    function addTodo() {
+        todos.push(todo4);
+        console.log(todos)
+        displayTodos();
+    }
+
+
+
+
+        //CREATE A DIV ELEMENT WITH JS
+        /*let divElem = document.createElement('div'); //create element is used to create an HTML element
+        divElem.innerHTML = message;
+        document.body.appendChild(divElem) //add div to our page(body)
+
+        divElem = document.createElement('div');
+        divElem.innerHTML = todo3;
+        document.body.appendChild(divElem);
+
+        divElem = document.createElement('div');
+        divElem.innerHTML = todo2;
+        document.body.appendChild(divElem);
+
+        let btn = document.createElement('button');
+        btn.innerHTML = 'click Me'
+        document.body.appendChild(btn)
+        */
+
+
+        //REFACTOR USNIG FUNCTIONS
+      /*  function createTodos(todoParam){
+            let divElem = document.createElement('div');
+            divElem.innerHTML = todoParam;
+            document.body.appendChild(divElem);
+        }
+        createTodos(todo2);
+        createTodos(todo1);
+        createTodos(todo3);
+        */
+        //when you pass an argument in a function with value between the brackets, this is known as passing in a value to the function Eg
+        //createTodos('Param') //OUTPUT: Param
+
+
+
+                        //###EXERCISES###
+
+        //FUNCTION EXERCISE
+        function greet(firstName){
+            console.log("Hello " + firstName);
+        }
+        greet('Joe'); //OUTPUT: Hello Joe. Notice if argument Joe is without quotes we get an error of 'Joe is not defined' 
+
+        //To Upper Case
+        // function toUpper(str){
+        //     return str.toUpperCase();
+        // }
+        // const toUpper = str => str.toUpperCase(); //arrow function
+        // console.log(toUpper('Simon'));
+
+        //CONVERSION
+        // function convertToCentimiters(length){
+        //     return length * 2.54;
+        // }
+        const convertToCentimiters = length  => length * 2.54   //arrow function
+        console.log(convertToCentimiters(2));
+        
+        //CAPITALIZE ARRAY STRINGS
+       function toUpper(arrStr){
+            const newArr = []
+            arrStr.forEach(val => {
+            result = val.toUpperCase();
+            newArr.push(result)
+            });
+            return newArr;
+       }
+      console.log(toUpper(todos));  
+
+      //REPEAT AN ARRAY VALUE TWICE
+      function arrayDouble(arr){
+        let emptyArr = [];
+        arr.forEach(value => {
+            emptyArr.push(value);
+            emptyArr.push(value);
+        })
+        return emptyArr;
+      }
+      console.log(arrayDouble(todos));
+
+      //REPEAT USING map
+      function arrayDouble(arr){
+        let emptyArr = [];
+        arr.map( value => {
+            emptyArr.push(value);
+            emptyArr.push(value);
+        })
+        return emptyArr;
+      } 
+      console.log(arrayDouble(todos));
+
+      //SUM OF ARRAY NUMBERS
+      function arraySum(arrNum){
+        let total = 0;
+        arrNum.forEach(value => {
+            total += value; //this is same as total = total + value
+        })
+        return total;
+      }
+
+      //Using REDUCE METHOD
+      function arraySum(arrNum){
+        return arrNum.reduce((previousVal, currentVal) => previousVal + currentVal );
+      }
+
+      const numbers = [1,2,3,4,5]
+      console.log(arraySum(numbers)); //OUTPUT: 15
+
+      //CHANGE TEXT OF BUTTON (button named NAME CHANGE) ONCE CLICKED
+      const changeName = () => btnName.innerHTML = 'Done'
+
+      let btnName = document.getElementById('btn-name')
+      btnName.addEventListener('click', changeName)
+
+      //DIV WITH COUNTER & A BUTTON UP WHICH INCREASES THE COUNTER ONCE CLICKED 
+      let counter = document.getElementById('counter');
+      console.log(counter.innerHTML)//OUTPUT: 0 
+      
+
+    </script>   
+</body>
+</html>
