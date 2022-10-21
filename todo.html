@@ -17,7 +17,11 @@
   <button id="decrease">DOWN</button>
   <div class="counter" id="counter"> 0 </div>
   <button id="addText">Add Text</button>
+
   <input type="text" id="todo-text" />
+
+  <div class="todo-list" id="todo-list"></div>  
+
   <script>
     let name = " Ben";
     let age = 25;
@@ -32,7 +36,9 @@
     let todo4 = 'Eat'
 
     //We can store these todo values in an array
-    let todos = ['Wash Car', 'Workout', 'Code']
+    let todos = ['Eat', 'Workout', 'Code']
+    render();//to display todos
+
     //We can use forEach to loop over array and display the items in HTML
     // todos.forEach( todoItem => {
     //     let divElem = document.createElement('div');
@@ -41,11 +47,43 @@
     // })\
 
     //MAP METHOD instead of forEach
-    todos.map(todoItem => {
+    // todos.map(todoItem => {
+    //   let divElem = document.createElement('div');
+    //   divElem.innerHTML = todoItem;
+    //   document.body.appendChild(divElem);
+    // })
+
+    let btn = document.getElementById('btn');
+    btn.addEventListener('click', addTodo)
+    //FUNCTION TO ADD NEW TODO ITEMS IN THE ARRAY
+    function addTodo() {
+      let todoText = document.getElementById('todo-text');
+      let todoVal = todoText.value
+      todos.push(todoVal);
+      console.log(todos)
+      
+      render()
+    }
+
+    function render(){
+      //to clear the items in todo-list so that we render an updated list everytime the render function is called
+
+      document.getElementById('todo-list').innerHTML = ''  //this resets the div to an empty list
+      
+
+      todos.map(todoItem => {
       let divElem = document.createElement('div');
-      divElem.innerHTML = todoItem;
-      document.body.appendChild(divElem);
+      divElem.innerText = todoItem;
+      //document.body.appendChild(divElem); - instead of pushing items in the body we push to the div todo-lst
+        let todoList = document.getElementById('todo-list');
+        todoList.appendChild(divElem)
+
+      /**
+       * The logic here is to get the input value, store it in a variable,push the variable to our todos array,loop the array and store each item in a div then append the div
+      */
     })
+    }
+
 
 
     //function called to display todo items
@@ -56,20 +94,6 @@
     //         document.body.appendChild(divElem);
     //     })
     // }
-
-
-
-    let btn = document.getElementById('btn');
-    btn.addEventListener('click', addTodo)
-    //FUNCTION TO ADD NEW TODO ITEMS IN THE ARRAY
-    function addTodo() {
-      todos.push(todo4);
-      console.log(todos)
-      displayTodos();
-    }
-
-
-
 
     //CREATE A DIV ELEMENT WITH JS
     /*let divElem = document.createElement('div'); //create element is used to create an HTML element
@@ -234,6 +258,14 @@
 
     let addText = document.getElementById('addText');
     addText.addEventListener('click', addTextValue)
+
+
+    /**     ###DIFFERENCE BETWEEN innerHTML & innerTEXT
+     * ->innerTEXT returns an element's text and all the child's elements whereas innerHTML returns all text plus the html tagsin an element.
+     * ->With innerTEXT you are not able to insert HTML tags but innerHTML one is able to insert HTML tags.So innerTEXT is safer than innerHTML.
+     * ->innerTEXT ignores spaces but innerHTML considers the spaces present
+     * 
+    */
 
   </script>
 </body>

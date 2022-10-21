@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INNERHTML DEMO</title>
+</head>
+<body>
+    <section >
+        <H1>A DEMO OF INNERHTML</H1>
+        <div id="test">HELLO WORLD
+            The following element contains some   
+            <italic>These words are in italics</italic>. 
+            <span>hELLO</span>
+        </div>
+    </section>
+    <button id="btn">Click</button>
+
+    <script>
+            let doc = document.getElementById('test');
+            let btn = document.getElementById('btn');
+
+            function innerFn() {
+                alert(test.innerHTML)
+            }
+
+            btn.addEventListener('click', (e) => {
+                e.preventDefault()
+                innerFn()
+            });       
+
+
+    </script>
+</body>
+</html>
