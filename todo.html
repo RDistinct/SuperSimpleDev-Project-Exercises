@@ -9,34 +9,51 @@
 </head>
 
 <body>
-  <!-- <button>UP</button>
-    <button>DOWN</button> -->
-  <button id="btn">ADD ITEM</button>
-  <button id="btn-name">CHANGE NAME</button>
+  
+  
+  <!-- <button id="btn-name">CHANGE NAME</button>
   <button id="increase">UP</button>
   <button id="decrease">DOWN</button>
   <div class="counter" id="counter"> 0 </div>
-  <button id="addText">Add Text</button>
+  <button id="addText">Add Text</button> -->
 
   <input type="text" id="todo-text" />
+  <input type="date" name="" id="date-picker"> <!--date-picker-->
+  <button id="btn">ADD TODO</button>
 
   <div class="todo-list" id="todo-list"></div>  
 
   <script>
-    let name = " Ben";
-    let age = 25;
-    let message = 'Im ' + name + ' and im ' + age + ' years old'
+    // let name = " Ben";
+    // let age = 25;
+    // let message = 'Im ' + name + ' and im ' + age + ' years old'
 
-    console.log(message)//OUTPUT: Im Ben and im 25 years old
-    typeof message // string
+    // console.log(message)//OUTPUT: Im Ben and im 25 years old
+    // typeof message // string
 
-    let todo1 = 'Wash Car'
-    let todo2 = 'Workout'
-    let todo3 = 'Code'
-    let todo4 = 'Eat'
+    // let todo1 = 'Wash Car'
+    // let todo2 = 'Workout'
+    // let todo3 = 'Code'
+    // let todo4 = 'Eat'
 
     //We can store these todo values in an array
-    let todos = ['Eat', 'Workout', 'Code']
+   //const todos = ['Eat', 'Workout', 'Code']
+
+    //convert todos into obects
+    const todos = [{
+        title: 'Eat',
+        dueDate: '2022-10-24'
+      },
+      {
+        title: 'Workout',
+        dueDate: '2022-10-26'
+      },
+      {
+        title: 'Code',
+        dueDate: '2022-10-27'
+      }]
+
+
     render();//to display todos
 
     //We can use forEach to loop over array and display the items in HTML
@@ -57,9 +74,16 @@
     btn.addEventListener('click', addTodo)
     //FUNCTION TO ADD NEW TODO ITEMS IN THE ARRAY
     function addTodo() {
-      let todoText = document.getElementById('todo-text');
-      let todoVal = todoText.value
-      todos.push(todoVal);
+      const todoText = document.getElementById('todo-text');
+      const title = todoText.value
+
+      //grab due date of todo.to associate each todo item with due date we use objects.They group different values related together.   
+      const datePicker = document.getElementById('date-picker');
+      const dueDate = datePicker.value;
+      todos.push({            //pushing an object
+        title:title,  
+        dueDate:dueDate
+      });
       console.log(todos)
       
       render()
@@ -71,11 +95,11 @@
       document.getElementById('todo-list').innerHTML = ''  //this resets the div to an empty list
       
 
-      todos.map(todoItem => {
-      let divElem = document.createElement('div');
-      divElem.innerText = todoItem;
+      todos.map(todoObject => {
+      const divElem = document.createElement('div');
+      divElem.innerText = todoObject.title + ' ' + todoObject.dueDate;
       //document.body.appendChild(divElem); - instead of pushing items in the body we push to the div todo-lst
-        let todoList = document.getElementById('todo-list');
+      const todoList = document.getElementById('todo-list');
         todoList.appendChild(divElem)
 
       /**
