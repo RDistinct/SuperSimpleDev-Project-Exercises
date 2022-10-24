@@ -71,19 +71,21 @@
     // })
 
     let btn = document.getElementById('btn');
-    btn.addEventListener('click', addTodo)
-    //FUNCTION TO ADD NEW TODO ITEMS IN THE ARRAY
+    btn.addEventListener('click', addTodo);
+    //FUNCTION TO ADD NEW TODO ITEMS IN THE ARRAY OF OBJECTS
     function addTodo() {
       const todoText = document.getElementById('todo-text');
       const title = todoText.value
 
-      //grab due date of todo.to associate each todo item with due date we use objects.They group different values related together.   
+      //grab due date & title of todo.to associate each todo item with due date we use objects.They group different values related together.   
       const datePicker = document.getElementById('date-picker');
       const dueDate = datePicker.value;
+
       todos.push({            //pushing an object
-        title:title,  
-        dueDate:dueDate
+        title:title,          //todoText.value
+        dueDate:dueDate       //datePicker.value
       });
+
       console.log(todos)
       
       render()
@@ -94,10 +96,11 @@
 
       document.getElementById('todo-list').innerHTML = ''  //this resets the div to an empty list
       
-
+      //loop through objects
       todos.map(todoObject => {
       const divElem = document.createElement('div');
-      divElem.innerText = todoObject.title + ' ' + todoObject.dueDate;
+      divElem.innerText = todoObject.title + ' ' + todoObject.dueDate;  //grab todo title and date & add them into divElem
+      
       //document.body.appendChild(divElem); - instead of pushing items in the body we push to the div todo-lst
       const todoList = document.getElementById('todo-list');
         todoList.appendChild(divElem)
