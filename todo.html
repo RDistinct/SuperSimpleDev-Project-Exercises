@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,11 +19,13 @@
   <input type="text" id="todo-text" placeholder="Enter Text"/>
   <input type="date" name="" id="date-picker">
   <!--date-picker-->
-  <button id="btn">ADD TODO</button>
+  <button id="btn" >ADD TODO</button>
 
   <div class="todo-list" id="todo-list"></div>
 
   <script>
+
+    
     // let name = " Ben";
     // let age = 25;
     // let message = 'Im ' + name + ' and im ' + age + ' years old'
@@ -42,6 +43,7 @@
 
     //convert todos into obects
     //used let coz we are going to reasign the array in deleteTodo function. An alternative instead of using let is to create a function that filters & renders the remaining items like what John Smigal did in his Vanilla JS 15 projects. 
+    //MODEL SECTION
    let todos = [{
       title: 'Eat',
       dueDate: '2022-10-24',
@@ -58,6 +60,33 @@
       id: 'id3'
     }]
 
+    // BUTTON OR ELEMENT THAT RESPONDS TO CLICK EVENTS BY USER ARE PART OF CONTROLLER
+    let btn = document.getElementById('btn');
+    btn.addEventListener('click', addTodo);
+    
+    //CREATE A TODO
+    function createTodo(title, dueDate){
+      //separating functions according to MVC model
+      const id ='' + new Date().getTime(); //gets current time in milliseconds.To convert to string add '' infornt of the value.This prevents type error since todos.id is a string but this is a number so it has to be converted.
+
+      todos.push({            //pushing an object
+        title: title,         //todoText.value
+        dueDate: dueDate,     //datePicker.value
+        id: id                //new Date().getTime()
+      });
+    }
+
+
+    function removeTodo(idToDelete){
+      todos = todos.filter(todo => {
+        //if it returns true, then the value(todo) is kept in the array.if it returns fdlse the value is removed from the array.We eant to remove the todo with idToDelete
+        if (todo.id === idToDelete) {
+          return false;   //returning false will remove it from the results array
+        } else {
+          return true;
+        }
+      });
+    }
 
     render();//to display todos
 
@@ -75,8 +104,8 @@
     //   document.body.appendChild(divElem);
     // })
 
-    let btn = document.getElementById('btn');
-    btn.addEventListener('click', addTodo);
+    
+      // CONTROLLER FUNCTION
     //FUNCTION TO ADD NEW TODO ITEMS IN THE ARRAY OF OBJECTS
     function addTodo() {
       const todoText = document.getElementById('todo-text');
@@ -86,17 +115,17 @@
       const datePicker = document.getElementById('date-picker');
       const dueDate = datePicker.value;
 
-      const id ='' + new Date().getTime(); //gets current time in milliseconds.To convert to string add '' infornt of the value.This prevents type error since todos.id is a string but this is a number so it has to be converted.
+      // const id ='' + new Date().getTime(); //gets current time in milliseconds.To convert to string add '' infornt of the value.This prevents type error since todos.id is a string but this is a number so it has to be converted.
 
-      todos.push({            //pushing an object
-        title: title,         //todoText.value
-        dueDate: dueDate,     //datePicker.value
-        id: id                //new Date().getTime()
-      });
-
-      console.log(todos)
-
-      render()
+      // todos.push({            //pushing an object
+      //   title: title,         //todoText.value
+      //   dueDate: dueDate,     //datePicker.value
+      //   id: id                //new Date().getTime()
+      // });
+      
+        createTodo(title, dueDate);
+      //console.log(todos)
+      render();
     }
 
     function deleteTodo(event){
@@ -112,17 +141,11 @@
        * 
       */
      //to find and remove values from an array, we use filter
-     todos = todos.filter(todo => {
-        //if it returns true, then the value(todo) is kept in the array.if it returns fdlse the value is removed from the array.We eant to remove the todo with idToDelete
-        if (todo.id === idToDelete) {
-          return false;   //returning false will remove it from the results array
-        } else {
-          return true;
-        }
-      })
+     removeTodo(idToDelete);
       render()
     }
 
+    //VIEW-TOGETHER WITH THE HTML THAT DISPLAYS CONTENT TO USER. 
     function render() {
       //to clear the items in todo-list so that we render an updated list everytime the render function is called
 
@@ -151,6 +174,7 @@
       })
     }
 
+    //render();
 
 
     //function called to display todo items
@@ -334,7 +358,14 @@
      * 
     */
 
+        //  This is the MVC arcitecture of writing code.
+        //   Model - contains code that saves & manages data
+        //   View - manages the visuals 
+        //   Controller - connects model and view together.Responds to events like button clicks & tells the model to update its data. 
+        //  With mvc, specific section handles specific code - there is code that handles the controller, view, and model.MVC ALLOWS each section to do one thing.this leads to minimum code
+        //the key to MVC is that a function does only one thing.
+      
+
   </script>
 </body>
-
-</html>
+</html> 
