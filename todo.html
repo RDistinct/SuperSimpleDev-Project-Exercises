@@ -41,7 +41,8 @@
     //const todos = ['Eat', 'Workout', 'Code']
 
     //convert todos into obects
-    const todos = [{
+    //used let coz we are going to reasign the array in deleteTodo function. An alternative instead of using let is to create a function that filters & renders the remaining items like what John Smigal did in his Vanilla JS 15 projects. 
+   let todos = [{
       title: 'Eat',
       dueDate: '2022-10-24',
       id: 'id1'
@@ -85,13 +86,12 @@
       const datePicker = document.getElementById('date-picker');
       const dueDate = datePicker.value;
 
-      const id = new Date().getTime(); //gets current time in milliseconds
+      const id ='' + new Date().getTime(); //gets current time in milliseconds.To convert to string add '' infornt of the value.This prevents type error since todos.id is a string but this is a number so it has to be converted.
 
       todos.push({            //pushing an object
         title: title,         //todoText.value
         dueDate: dueDate,     //datePicker.value
         id: id                //new Date().getTime()
-
       });
 
       console.log(todos)
@@ -111,6 +111,16 @@
        * 
        * 
       */
+     //to find and remove values from an array, we use filter
+     todos = todos.filter(todo => {
+        //if it returns true, then the value(todo) is kept in the array.if it returns fdlse the value is removed from the array.We eant to remove the todo with idToDelete
+        if (todo.id === idToDelete) {
+          return false;   //returning false will remove it from the results array
+        } else {
+          return true;
+        }
+      })
+      render()
     }
 
     function render() {
