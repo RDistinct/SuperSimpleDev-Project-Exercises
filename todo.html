@@ -16,10 +16,10 @@
   <div class="counter" id="counter"> 0 </div>
   <button id="addText">Add Text</button> -->
 
-  <input type="text" id="todo-text" placeholder="Enter Text"/>
+  <input type="text" id="todo-text" placeholder="Enter Todo"/>
   <input type="date" name="" id="date-picker">
   <!--date-picker-->
-  <button id="btn" >ADD TODO</button>
+  <button id="btn" style="margin:12px 0px;">ADD TODO</button>
 
   <div class="todo-list" id="todo-list"></div>
 
@@ -43,10 +43,11 @@
 
     //convert todos into obects
     //used let coz we are going to reasign the array in deleteTodo function. An alternative instead of using let is to create a function that filters & renders the remaining items like what John Smigal did in his Vanilla JS 15 projects. 
+
     //MODEL SECTION
    let todos = [{
       title: 'Eat',
-      dueDate: '2022-10-24',
+      dueDate: '2022-10-26',
       id: 'id1'
     },
     {
@@ -56,10 +57,10 @@
     },
     {
       title: 'Code',
-      dueDate: '2022-10-27',
+      dueDate: '2022-10-26',
       id: 'id3'
     }]
-
+     
     // BUTTON OR ELEMENT THAT RESPONDS TO CLICK EVENTS BY USER ARE PART OF CONTROLLER
     let btn = document.getElementById('btn');
     btn.addEventListener('click', addTodo);
@@ -86,6 +87,15 @@
           return true;
         }
       });
+    }
+
+    //TOGGLE TODO
+    function toggleTodo(todoId, checked){
+        todos.map(todo => {
+          if(todo.id === todoId){
+            todo.isDone = checked;
+          }
+        })
     }
 
     render();//to display todos
@@ -145,6 +155,19 @@
       render()
     }
 
+
+    function checkTodo(event){
+      const checkbox = event.target;
+        console.log(checkbox)
+      const todoId = checkbox.dataset.todoId;
+        console.log('checkbox todoId: ' + todoId )
+      const checked = checkbox.checked;
+
+      //call toggleTodo
+      toggleTodo(todoId, checked);
+      render();
+    }
+
     //VIEW-TOGETHER WITH THE HTML THAT DISPLAYS CONTENT TO USER. 
     function render() {
       //to clear the items in todo-list so that we render an updated list everytime the render function is called
@@ -163,6 +186,21 @@
         deleteButton.onclick = deleteTodo;  //click will call deleteTodo function
         deleteButton.id = todoObject.id;
         divElem.appendChild(deleteButton)
+
+
+        //ADD CHECKBOX
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox'
+        checkbox.onchange = checkTodo;  //calls checkTodo() function
+        // checkbox.dataset.todoId = todo.id;
+        // if(todo.isDone === true ){
+        //   checkbox.checked = true;
+        // }else{
+        //   checkbox.checked = false;
+        // }
+
+        divElem.prepend(checkbox);
+
         
         //document.body.appendChild(divElem); - instead of pushing items in the body we push to the div todo-lst
         const todoList = document.getElementById('todo-list');
@@ -359,9 +397,9 @@
     */
 
         //  This is the MVC arcitecture of writing code.
-        //   Model - contains code that saves & manages data
+        //   Model - contains code that saves & manages data.The brains of the operation.It also interacts with database(SELECT,INSERT,UPDATE,DELETE)
         //   View - manages the visuals 
-        //   Controller - connects model and view together.Responds to events like button clicks & tells the model to update its data. 
+        //   Controller - connects model and view together.Responds to events like button clicks & tells the model to update its data.receives input from view & passes data to the view. 
         //  With mvc, specific section handles specific code - there is code that handles the controller, view, and model.MVC ALLOWS each section to do one thing.this leads to minimum code
         //the key to MVC is that a function does only one thing.
       
